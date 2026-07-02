@@ -54,7 +54,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    padding:calc(env(safe-area-inset-top) + 22px) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 
   /* subtle paper grain */
@@ -71,7 +71,7 @@
   .card{
     position:relative;
     width:min(96vw, 430px);
-    height:min(96dvh, 860px);
+    height:min(91dvh, 830px);
     background:var(--paper);
     border:3px solid var(--card-border);
     border-radius:22px;
@@ -239,7 +239,7 @@
     margin-top:calc(4px + 0.8vh);
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
     gap:8px;
   }
 
@@ -250,20 +250,6 @@
     color:var(--ink);
   }
   .progress-text b{ color:var(--accent-dark); }
-
-  .reset-btn{
-    all:unset;
-    font-family:'Special Elite', monospace;
-    font-size:9px;
-    letter-spacing:1.5px;
-    color:var(--muted);
-    text-transform:uppercase;
-    padding:4px 8px;
-    border:1.5px dashed var(--ink-soft);
-    border-radius:20px;
-    cursor:pointer;
-  }
-  .reset-btn:active{ opacity:0.6; }
 
   /* Add to Home Screen banner */
   .a2hs{
@@ -335,7 +321,6 @@
 
     <div class="footer">
       <p class="progress-text" id="progressText">0 of 31 mornings</p>
-      <button class="reset-btn" id="resetBtn" type="button">reset month</button>
     </div>
   </div>
 
@@ -458,14 +443,6 @@
     }catch(e){ /* no saved data yet */ }
     paint();
   }
-
-  document.getElementById('resetBtn').addEventListener('click', () => {
-    if(confirm('Clear all punched suns for July?')){
-      completed = new Set();
-      paint();
-      persist();
-    }
-  });
 
   load();
 
